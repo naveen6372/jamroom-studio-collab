@@ -169,7 +169,6 @@ const Profile = () => {
         <h2 className="text-xl font-bold mb-6">Activity Overview</h2>
         
         <ChartContainer config={CHART_CONFIG} className="h-[350px]">
-          {/* The ResponsiveContainer must be the only direct child of ChartContainer */}
           <ResponsiveContainer>
             <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 30 }}>
               <XAxis dataKey="name" />
@@ -181,11 +180,12 @@ const Profile = () => {
               <Bar dataKey="average" fill={CHART_CONFIG.average.color} />
             </BarChart>
           </ResponsiveContainer>
-          <ChartLegend
-            verticalAlign="bottom"
-            content={<ChartLegendContent />}
-          />
         </ChartContainer>
+        
+        <ChartLegend
+          verticalAlign="bottom"
+          content={<ChartLegendContent />}
+        />
       </div>
     </div>
   );

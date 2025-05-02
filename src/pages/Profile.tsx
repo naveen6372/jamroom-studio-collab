@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -41,6 +40,27 @@ const CHART_CONFIG = {
     label: "Avg Loops/Room",
     color: "#14b8a6" // Teal
   }
+};
+
+// Custom tooltip component for the chart
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-background p-3 border border-border rounded-md shadow-md">
+        <p className="font-medium">{label}</p>
+        {payload.map((entry: any, index: number) => (
+          <div key={`item-${index}`} className="flex items-center gap-2 text-sm">
+            <div 
+              className="h-3 w-3 rounded-full" 
+              style={{ backgroundColor: entry.fill }}
+            />
+            <span>{entry.name}: {entry.value}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return null;
 };
 
 const Profile = () => {
@@ -180,36 +200,15 @@ const Profile = () => {
               <Bar dataKey="average" fill={CHART_CONFIG.average.color} />
             </BarChart>
           </ResponsiveContainer>
+          
+          <ChartLegend
+            verticalAlign="bottom"
+            content={<ChartLegendContent />}
+          />
         </ChartContainer>
-        
-        <ChartLegend
-          verticalAlign="bottom"
-          content={<ChartLegendContent />}
-        />
       </div>
     </div>
   );
-};
-
-// Custom tooltip component for the chart
-const CustomTooltip = ({ active, payload, label }: any) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-background p-3 border border-border rounded-md shadow-md">
-        <p className="font-medium">{label}</p>
-        {payload.map((entry: any, index: number) => (
-          <div key={`item-${index}`} className="flex items-center gap-2 text-sm">
-            <div 
-              className="h-3 w-3 rounded-full" 
-              style={{ backgroundColor: entry.fill }}
-            />
-            <span>{entry.name}: {entry.value}</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
-  return null;
 };
 
 export default Profile;

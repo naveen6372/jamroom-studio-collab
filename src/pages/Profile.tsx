@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -169,15 +168,17 @@ const Profile = () => {
         <h2 className="text-xl font-bold mb-6">Activity Overview</h2>
         
         <ChartContainer config={CHART_CONFIG} className="h-[350px]">
-          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 30 }}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="rooms" fill={CHART_CONFIG.rooms.color} />
-            <Bar dataKey="loops" fill={CHART_CONFIG.loops.color} />
-            <Bar dataKey="exports" fill={CHART_CONFIG.exports.color} />
-            <Bar dataKey="average" fill={CHART_CONFIG.average.color} />
-          </BarChart>
+          <ResponsiveContainer>
+            <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 30 }}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip content={<CustomTooltip />} />
+              <Bar dataKey="rooms" fill={CHART_CONFIG.rooms.color} />
+              <Bar dataKey="loops" fill={CHART_CONFIG.loops.color} />
+              <Bar dataKey="exports" fill={CHART_CONFIG.exports.color} />
+              <Bar dataKey="average" fill={CHART_CONFIG.average.color} />
+            </BarChart>
+          </ResponsiveContainer>
           <ChartLegend
             verticalAlign="bottom"
             content={<ChartLegendContent />}

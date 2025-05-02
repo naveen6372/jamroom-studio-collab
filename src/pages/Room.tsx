@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,7 +13,7 @@ import {
   Volume2, 
   VolumeX,
   Share,
-  Export 
+  FileExport 
 } from "lucide-react";
 
 interface RoomData {
@@ -304,7 +303,7 @@ const Room = () => {
             <Share className="mr-2 h-4 w-4" /> Share
           </Button>
           <Button variant="outline" onClick={exportMix}>
-            <Export className="mr-2 h-4 w-4" /> Export Mix
+            <FileExport className="mr-2 h-4 w-4" /> Export Mix
           </Button>
         </div>
       </div>
